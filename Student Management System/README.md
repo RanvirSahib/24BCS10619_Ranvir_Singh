@@ -2,6 +2,10 @@
 
 A simple web application to manage student records.
 
+## Live Demo
+- Frontend: https://studentsystem-five.vercel.app/
+- Backend API: https://student-management-backend-exr8.onrender.com/
+
 ## Features
 - Add, view, edit and delete students
 - Store student details in MongoDB
