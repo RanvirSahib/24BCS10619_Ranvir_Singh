@@ -2,8 +2,9 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 
-function App() {
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
 
+function App() {
     const [students, setStudents] = useState([]);
 
     const [name, setName] = useState("");
@@ -14,8 +15,11 @@ function App() {
     const [editId, setEditId] = useState(null);
 
     function getStudents() {
-        fetch("http://localhost:5000/api/students")
-            .then(response => response.json())
+        fetch(`${API_URL}/api/students`)
+            .then(response => {
+                if (!response.ok) throw new Error("Failed to fetch students");
+                return response.json();
+            })
             .then(data => setStudents(data))
             .catch(error => console.log(error));
     }
@@ -34,32 +38,31 @@ function App() {
             department
         };
 
-        let url = "http://localhost:5000/api/students";
+        let url = `${API_URL}/api/students`;
         let method = "POST";
 
         if (editId) {
-            url = url + "/" + editId;
+            url = `${url}/${editId}`;
             method = "PUT";
         }
 
         fetch(url, {
-            method: method,
+            method,
             headers: {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify(student)
         })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error("Operation failed");
-            }
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("Operation failed");
+                }
 
-            alert(editId ? "Student Updated" : "Student Added");
-
-            clearForm();
-            getStudents();
-        })
-        .catch(error => alert(error.message));
+                alert(editId ? "Student Updated" : "Student Added");
+                clearForm();
+                getStudents();
+            })
+            .catch(error => alert(error.message));
     }
 
     function editStudent(student) {
@@ -71,23 +74,22 @@ function App() {
     }
 
     function deleteStudent(id) {
-
         if (!window.confirm("Are you sure you want to delete this student?")) {
             return;
         }
 
-        fetch("http://localhost:5000/api/students/" + id, {
+        fetch(`${API_URL}/api/students/${id}`, {
             method: "DELETE"
         })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error("Delete failed");
-            }
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("Delete failed");
+                }
 
-            alert("Student Deleted");
-            getStudents();
-        })
-        .catch(error => alert(error.message));
+                alert("Student Deleted");
+                getStudents();
+            })
+            .catch(error => alert(error.message));
     }
 
     function clearForm() {
@@ -100,13 +102,11 @@ function App() {
 
     return (
         <div className="container">
-
             <h1>Student Management System</h1>
 
             <h2>{editId ? "Edit Student" : "Add Student"}</h2>
 
             <form onSubmit={saveStudent}>
-
                 <input
                     type="text"
                     placeholder="Enter Name"
@@ -148,7 +148,6 @@ function App() {
                         Cancel
                     </button>
                 )}
-
             </form>
 
             <h2>Student Records</h2>
@@ -173,7 +172,6 @@ function App() {
                             <td>{student.email}</td>
                             <td>{student.rollNumber}</td>
                             <td>{student.department}</td>
-
                             <td>
                                 <button onClick={() => editStudent(student)}>
                                     Edit
@@ -189,7 +187,6 @@ function App() {
             </table>
 
             <h3>Total Students: {students.length}</h3>
-
         </div>
     );
 }
