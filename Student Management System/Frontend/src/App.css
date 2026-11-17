@@ -1,0 +1,89 @@
+body{
+  font-family: 'Times New Roman';
+  background-color: #dfd7ca;
+}
+
+.container{
+  width: 90%;
+  margin: 30px;
+}
+
+h1{
+  font-family: 'Times New Roman', Times, serif;
+  text-align: center;
+  color:#2a2a2a;
+}
+
+h2{
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  color: #333;
+}
+
+form{
+  background: rgb(216, 174, 142);
+  padding: 20px;
+  margin-bottom: 30px;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+form button{
+  margin: 10px;
+}
+
+td button{
+  margin: 3px;
+  padding: 8px 15px;
+}
+
+td button:last-child {
+  background-color: rgb(164, 36, 36);
+}
+
+td button:last-child:hover {
+  background-color: red;
+}
+
+input{
+  width: 95%;
+  padding: 12px;
+  margin-bottom: 20px;
+}
+
+button{
+  padding: 12px 25px;
+  background: rgb(168, 96, 57);
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+button:hover{
+  background:  rgb(100, 10, 60);
+}
+
+table{
+  width: 100%;
+  background-color: white;
+  border-collapse: collapse;
+}
+
+th, td{
+  padding: 12px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+
+th{
+  background-color:  #e1ae7f;
+  color: black;
+}
+
+tbody{
+  color: black;
+}
+
+h3{
+  margin-top: 20px;
+  color: #333;
+}
